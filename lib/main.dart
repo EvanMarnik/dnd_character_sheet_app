@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:character_sheet_dnd/view/character_list_view.dart';
-
 import 'router.dart' as LocalRouter;
 import 'constants.dart';
+
+import 'package:dnd_character_sheet_app/view/character_list_view.dart';
 
 void main() {
   runApp(MyApp());

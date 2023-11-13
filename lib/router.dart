@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:character_sheet_dnd/view_model/character_creator_view_model.dart';
-import 'package:character_sheet_dnd/view_model/character_list_view_model.dart';
-import 'package:character_sheet_dnd/view_model/character_sheet_view_model.dart';
+import 'package:dnd_character_sheet_app/view_model/character_creator_view_model.dart';
+import 'package:dnd_character_sheet_app/view_model/character_list_view_model.dart';
+import 'package:dnd_character_sheet_app/view_model/character_sheet_view_model.dart';
 
-import 'package:character_sheet_dnd/view/character_creator_view.dart';
-import 'package:character_sheet_dnd/view/character_list_view.dart';
-import 'package:character_sheet_dnd/view/character_sheet_view.dart';
+import 'package:dnd_character_sheet_app/view/character_creator_view.dart';
+import 'package:dnd_character_sheet_app/view/character_list_view.dart';
+import 'package:dnd_character_sheet_app/view/character_sheet_view.dart';
 
 import 'package:provider/provider.dart';
 
