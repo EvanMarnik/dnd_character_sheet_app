@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "character_sheet_dnd" "\0"
+            VALUE "FileDescription", "dnd_character_sheet_app" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "character_sheet_dnd" "\0"
+            VALUE "InternalName", "dnd_character_sheet_app" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "character_sheet_dnd.exe" "\0"
-            VALUE "ProductName", "character_sheet_dnd" "\0"
+            VALUE "OriginalFilename", "dnd_character_sheet_app.exe" "\0"
+            VALUE "ProductName", "dnd_character_sheet_app" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

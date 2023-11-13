@@ -1,4 +1,4 @@
-package com.example.character_sheet_dnd
+package com.example.dnd_character_sheet_app
 
 import io.flutter.embedding.android.FlutterActivity
 
