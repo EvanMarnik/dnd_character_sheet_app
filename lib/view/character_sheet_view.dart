@@ -81,8 +81,7 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
                 height: 80.0,
                 color: Colors.amberAccent,
                 alignment: Alignment.center,
-                child: const Text('14 \n Armor Class'),
-
+                child: const Text('14 \n Armor Class', style: TextStyle(fontSize: 18)),
               ),
               Container(
                 margin: EdgeInsets.all(25.0),
@@ -90,7 +89,7 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
                 height: 80.0,
                 color: Colors.amberAccent,
                 alignment: Alignment.center,
-                child: const Text('+3 \nInitiative'),
+                child: const Text('+3 \nInitiative', style: TextStyle(fontSize: 18)),
               ),
               Container(
                 margin: EdgeInsets.all(25.0),
@@ -98,7 +97,7 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
                 height: 80.0,
                 color: Colors.amberAccent,
                 alignment: Alignment.center,
-                child: const Text('30 \nSpeed'),
+                child: const Text('30 \nSpeed', style: TextStyle(fontSize: 18)),
               ),
             ],
           ),
@@ -110,8 +109,7 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
                 height: 80.0,
                 color: Colors.amberAccent,
                 alignment: Alignment.center,
-                child: const Text('+2 \n Proficiency'),
-
+                child: const Text('+2 \n Proficiency', style: TextStyle(fontSize: 18)),
               ),
               Container(
                 margin: EdgeInsets.all(25.0),
@@ -119,7 +117,7 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
                 height: 80.0,
                 color: Colors.amberAccent,
                 alignment: Alignment.center,
-                child: const Text('12/12 \n Hit Points'),
+                child: const Text('12/12 \n Hit Points', style: TextStyle(fontSize: 18)),
               ),
               Container(
                 margin: EdgeInsets.all(25.0),
@@ -127,9 +125,17 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
                 height: 80.0,
                 color: Colors.amberAccent,
                 alignment: Alignment.center,
-                child: const Text('1d10 \nHit Dice'),
+                child: const Text('1d10 \nHit Dice', style: TextStyle(fontSize: 18)),
               ),
             ],
+          ),
+          Container(
+            margin: EdgeInsets.all(25.0),
+            width: 400.0,
+            height: 300.0,
+            color: Colors.amberAccent,
+            alignment: Alignment.center,
+              child: const Text('Ability Scores', style: TextStyle(fontSize: 18))
           ),
           TextButton(
             style: TextButton.styleFrom(
