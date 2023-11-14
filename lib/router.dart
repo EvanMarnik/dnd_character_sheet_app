@@ -27,7 +27,7 @@ class Router {
         var charID = settings.arguments as int;
         return MaterialPageRoute(builder: (_) =>
             ChangeNotifierProvider(
-                create: (context) => CharacterSheetViewModel(),
+                create: (context) => CharacterSheetViewModel(charID: charID),
                 child: CharacterSheetView(charID),
             )
         );
