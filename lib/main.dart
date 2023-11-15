@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
             fontFamily: 'Lancelot'
           )
         ),
+        
         filledButtonTheme: FilledButtonThemeData(
           style: FilledButton.styleFrom(
             backgroundColor: const Color(0xFFAD9090),

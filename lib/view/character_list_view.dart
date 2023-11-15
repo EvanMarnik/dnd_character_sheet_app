@@ -45,7 +45,7 @@ class CharacterListView extends StatelessWidget {
                 SizedBox(
                   width: 350,
                   child: FilledButton(
-                    style: TextButton.styleFrom(
+                    style: FilledButton.styleFrom(
                       textStyle: const TextStyle(fontSize: 25),
                     ),
                     onPressed: (){
