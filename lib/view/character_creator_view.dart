@@ -6,7 +6,7 @@ class CharacterCreatorView extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color(0xFF0099a9),
+            backgroundColor: Color(0xFFAD9090),
           title: const Text('Character Creator'),
         ),
         body: const Center(
