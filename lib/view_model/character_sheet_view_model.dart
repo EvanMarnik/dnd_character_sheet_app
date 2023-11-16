@@ -45,7 +45,10 @@ class CharacterSheetViewModel extends ChangeNotifier {
                 maxSpellSlots: null,
                 currSpellSlots: null,
                 maxHitPoints: 15,
-                currHitPoints: 15
+                currHitPoints: 15,
+                armorClass: 15,
+                speed: 30,
+                hitDice: 12,
             );
     }
 
@@ -66,6 +69,8 @@ class CharacterSheetViewModel extends ChangeNotifier {
 
     List<int> get abilityScores => character_model.abilityScores;
 
+    List<int> get abilityModifiers => character_model.abilityModifiers;
+
     List<String>? get spells => character_model.spells;
 
     int? get maxSpellSlots => character_model.maxSpellSlots;
@@ -75,6 +80,16 @@ class CharacterSheetViewModel extends ChangeNotifier {
     int get maxHitPoints => character_model.maxHitPoints;
 
     int get currHitPoints => character_model.currHitPoints;
+
+    int get armorClass => character_model.armorClass;
+
+    int get speed => character_model.speed;
+
+    int get hitDice => character_model.hitDice;
+
+    List<int> getSavingThrows() {
+      return character_model.getSavingThrows();
+    }
 
     // resource methods for the class
     void addSpell(String spell) {

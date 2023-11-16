@@ -16,27 +16,29 @@ class CharacterSheetView extends StatefulWidget {
 
 class _CharacterSheetViewState extends State<CharacterSheetView> {
   final TextEditingController _controller = TextEditingController();
-  int hp = 15;
-  int maxHP = 15;
+  late CharacterSheetViewModel vm;
+  // int hp = 15;
+  // int maxHP = 15;
 
   @override
   void initState() {
     super.initState();
     // TODO hard coded sheet for now
+    vm = CharacterSheetViewModel(charID: 0);
   }
 
   void incrementHealth() {
     setState(() {
-      if (hp < maxHP) {
-        hp += 1;
+      if (vm.currHitPoints < vm.maxHitPoints) {
+        vm.addHitPoints(1);
       }
     });
   }
 
   void decrementHealth() {
     setState(() {
-      if (hp > 0) {
-        hp -= 1;
+      if (vm.currHitPoints > 0) {
+        vm.removeHitPoints(1);
       }
     });
   }
@@ -48,7 +50,7 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFAD9090),
-        title: const Text('Coddrin Thunderslayer',
+        title: Text(vm.name,
             style: TextStyle(fontSize: 24, color: Colors.black)),
       ),
       body: Column(
@@ -61,7 +63,7 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
                 height: 80.0,
                 color: Color(0xFFAD9090),
                 alignment: Alignment.center,
-                child: const Text('14 \n Armor Class',
+                child: Text('${vm.armorClass} \n Armor Class',
                     style: TextStyle(fontSize: 18),
                     textAlign: TextAlign.center),
               ),
@@ -71,7 +73,7 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
                 height: 80.0,
                 color: Color(0xFFAD9090),
                 alignment: Alignment.center,
-                child: const Text('+3 \nInitiative',
+                child: Text('+${vm.abilityModifiers[1]} \nInitiative',
                     style: TextStyle(fontSize: 18),
                     textAlign: TextAlign.center),
               ),
@@ -81,7 +83,7 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
                 height: 80.0,
                 color: Color(0xFFAD9090),
                 alignment: Alignment.center,
-                child: const Text('30 \nSpeed',
+                child: Text('${vm.speed} \nSpeed',
                     style: TextStyle(fontSize: 18),
                     textAlign: TextAlign.center),
               ),
@@ -105,7 +107,7 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
                 height: 80.0,
                 color: Color(0xFFAD9090),
                 alignment: Alignment.center,
-                child: Text('${hp}/15 \n Hit Points',
+                child: Text('${vm.currHitPoints}/${vm.maxHitPoints} \n Hit Points',
                     style: TextStyle(fontSize: 18),
                     textAlign: TextAlign.center),
               ),
@@ -147,7 +149,7 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
                 height: 80.0,
                 color: Color(0xFFAD9090),
                 alignment: Alignment.center,
-                child: const Text('1d10 \nHit Dice',
+                child: Text('1d${vm.hitDice} \nHit Dice',
                     style: TextStyle(fontSize: 18),
                     textAlign: TextAlign.center),
               ),
@@ -174,7 +176,7 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
                     width: 90.0,
                     height: 70.0,
                     decoration: BoxDecoration(border: Border.all(color:Colors.black)),
-                    child: const Text('STR \n 16 (+3) \n Save: +5',
+                    child: Text('STR \n ${vm.abilityScores[0]} (${vm.abilityModifiers[0]}) \n Save: ${vm.getSavingThrows()[0]}',
                         style: TextStyle(fontSize: 18),
                         textAlign: TextAlign.center),
                   )],
@@ -184,7 +186,7 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
                   width: 90.0,
                   height: 70.0,
                   decoration: BoxDecoration(border: Border.all(color:Colors.black)),
-                  child: const Text('DEX \n 14 (+2) \n Save: +3',
+                  child: Text('DEX \n ${vm.abilityScores[1]} (${vm.abilityModifiers[1]}) \n Save: ${vm.getSavingThrows()[1]}',
                       style: TextStyle(fontSize: 18),
                       textAlign: TextAlign.center),
                 )],
@@ -194,7 +196,7 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
                   width: 90.0,
                   height: 70.0,
                   decoration: BoxDecoration(border: Border.all(color:Colors.black)),
-                  child: const Text('CON \n 16 (+3) \n Save: +5',
+                  child: Text('CON \n ${vm.abilityScores[2]} (${vm.abilityModifiers[2]}) \n Save: ${vm.getSavingThrows()[2]}',
                       style: TextStyle(fontSize: 18),
                       textAlign: TextAlign.center),
                 )],
@@ -215,7 +217,7 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
                     width: 90.0,
                     height: 70.0,
                     decoration: BoxDecoration(border: Border.all(color:Colors.black)),
-                    child: const Text('INT \n 8 (-1) \n Save: -1',
+                    child: Text('INT \n ${vm.abilityScores[3]} (${vm.abilityModifiers[3]}) \n Save: ${vm.getSavingThrows()[3]}',
                         style: TextStyle(fontSize: 18),
                         textAlign: TextAlign.center),
                   )],
@@ -225,7 +227,7 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
                   width: 90.0,
                   height: 70.0,
                   decoration: BoxDecoration(border: Border.all(color:Colors.black)),
-                  child: const Text('WIS \n 10 (+0) \n Save: +0',
+                  child: Text('WIS \n ${vm.abilityScores[4]} (${vm.abilityModifiers[4]}) \n Save: ${vm.getSavingThrows()[4]}',
                       style: TextStyle(fontSize: 18),
                       textAlign: TextAlign.center),
                 )],
@@ -236,23 +238,13 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
                   height: 70.0,
 
                   decoration: BoxDecoration(border: Border.all(color:Colors.black)),
-                  child: const Text('CHA \n 8 (-1) \n Save: -1',
+                  child: Text('CHA \n ${vm.abilityScores[5]} (${vm.abilityModifiers[5]}) \n Save: ${vm.getSavingThrows()[5]}',
                       style: TextStyle(fontSize: 18),
                       textAlign: TextAlign.center),
                 )],
                 ),
               ],
             ),
-          ),
-
-          TextButton(
-            style: TextButton.styleFrom(
-              textStyle: const TextStyle(fontSize: 20),
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text('Back'),
           ),
         ],
       ),

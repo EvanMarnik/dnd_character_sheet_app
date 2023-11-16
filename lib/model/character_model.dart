@@ -15,10 +15,14 @@ class CharacterModel {
     int? currSpellSlots;
     int maxHitPoints;
     int currHitPoints;
+    int armorClass;
+    int speed;
+    int hitDice;
 
     // late because they are built in the constructor
-    late List<int> skillProficiencyNums;
-    late List<String> otherProficiencies;
+    late List<int> skillProficiencyNums = [];
+    late List<String> otherProficiencies = [];
+    late List<int> abilityModifiers = [];
 
     CharacterModel({
         required this.name,
@@ -32,15 +36,27 @@ class CharacterModel {
         this.currSpellSlots,
         required this.maxHitPoints,
         required this.currHitPoints,
+        required this.armorClass,
+        required this.speed,
+        required this.hitDice,
     }) {
         // combine proficiency lists
         skillProficiencyNums = charClass.getSkillProficiencies;
-        skillProficiencyNums.addAll(subclass?.getSkillProficiencies as Iterable<int>);
         skillProficiencyNums.addAll(background.getSkillProficiencies);
 
         otherProficiencies = charClass.getOtherProficiencies;
-        otherProficiencies.addAll(subclass?.getOtherProficiencies as Iterable<String>);
         otherProficiencies.addAll(background.getOtherProficiencies);
+
+        // conditionally add subclass proficiencies
+        if (subclass != null) {
+            skillProficiencyNums.addAll(subclass?.getSkillProficiencies as Iterable<int>);
+            otherProficiencies.addAll(subclass?.getOtherProficiencies as Iterable<String>);
+        }
+
+        // construct ability modifiers
+        for (int score in abilityScores) {
+            abilityModifiers.add(((score-10)/2).floor());
+        }
     }
 
     // constructor from json
@@ -57,6 +73,9 @@ class CharacterModel {
             currSpellSlots: json["Current Spell Slots"],
             maxHitPoints: json["Max Hit Points"],
             currHitPoints: json["Current Hit Points"],
+            armorClass: json["Armor Class"],
+            speed: json["Speed"],
+            hitDice: json["Hit Dice"]
         );
     }
 
@@ -79,6 +98,9 @@ class CharacterModel {
     List<int> get getAbilityScores => abilityScores;
     set setAbilityScores(List<int> abilityScores) => this.abilityScores = abilityScores;
 
+    List<int> get getAbilityModifiers => abilityModifiers;
+    set setAbilityModifiers(List<int> abilityModifiers) => this.abilityModifiers = abilityModifiers;
+
     List<String>? get getSpells => spells;
     set setSpells(List<String> spells) => this.spells = spells;
 
@@ -87,4 +109,48 @@ class CharacterModel {
 
     int get getCurrHitPoints => currHitPoints;
     set setCurrHitPoints(int currHitPoints) => this.currHitPoints = currHitPoints;
+
+    int get getMaxHitPoints => maxHitPoints;
+    set setMaxHitPoints(int maxHitPoints) => this.maxHitPoints = maxHitPoints;
+
+    int? get getMaxSpellSlots => maxSpellSlots;
+    set setMaxSpellSlots(int maxSpellSlots) => this.maxSpellSlots = maxSpellSlots;
+
+    int get getArmorClass => armorClass;
+    set setArmorClass(int armorClass) => this.armorClass = armorClass;
+
+    int get getSpeed => speed;
+    set setSpeed(int speed) => this.speed = speed;
+
+    int get getHitDice => hitDice;
+    set setHitDice(int hitDice) => this.hitDice = hitDice;
+
+    List<int> getSavingThrows() {
+        switch (charClass.name) {
+            case "Barbarian":
+                return [abilityModifiers[0]+2, abilityModifiers[1], abilityModifiers[2]+2, abilityModifiers[3], abilityModifiers[4], abilityModifiers[5]];
+            case "Bard":
+                return [abilityModifiers[0], abilityModifiers[1]+2, abilityModifiers[2], abilityModifiers[3], abilityModifiers[4], abilityModifiers[5]+2];
+            case "Cleric":
+                return [abilityModifiers[0], abilityModifiers[1], abilityModifiers[2], abilityModifiers[3], abilityModifiers[4]+2, abilityModifiers[5]+2];
+            case "Druid":
+                return [abilityModifiers[0], abilityModifiers[1], abilityModifiers[2], abilityModifiers[3]+2, abilityModifiers[4]+2, abilityModifiers[5]];
+            case "Fighter":
+                return [abilityModifiers[0]+2, abilityModifiers[1], abilityModifiers[2]+2, abilityModifiers[3], abilityModifiers[4], abilityModifiers[5]];
+            case "Monk":
+                return [abilityModifiers[0]+2, abilityModifiers[1]+2, abilityModifiers[2], abilityModifiers[3], abilityModifiers[4], abilityModifiers[5]];
+            case "Paladin":
+                return [abilityModifiers[0], abilityModifiers[1], abilityModifiers[2], abilityModifiers[3]+2, abilityModifiers[4], abilityModifiers[5]+2];
+            case "Ranger":
+                return [abilityModifiers[0]+2, abilityModifiers[1]+2, abilityModifiers[2], abilityModifiers[3], abilityModifiers[4], abilityModifiers[5]];
+            case "Rogue":
+                return [abilityModifiers[0], abilityModifiers[1]+2, abilityModifiers[2], abilityModifiers[3]+2, abilityModifiers[4], abilityModifiers[5]];
+            case "Sorcerer":
+                return [abilityModifiers[0], abilityModifiers[1], abilityModifiers[2]+2, abilityModifiers[3], abilityModifiers[4], abilityModifiers[5]+2];
+            case "Warlock":
+                return [abilityModifiers[0], abilityModifiers[1], abilityModifiers[2], abilityModifiers[3], abilityModifiers[4]+2, abilityModifiers[5]+2];
+            default: // Wizard
+                return [abilityModifiers[0], abilityModifiers[1], abilityModifiers[2], abilityModifiers[3]+2, abilityModifiers[4]+2, abilityModifiers[5]];
+        }
+    }
 }
