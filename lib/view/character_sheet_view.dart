@@ -50,8 +50,8 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
     // TODO build the character sheet
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF0099a9),
-        title: const Text('Coddrin Thunderslayer'),
+        backgroundColor: Color(0xFFAD9090),
+        title: const Text('Coddrin Thunderslayer', style: TextStyle(fontSize: 24, color: Colors.black)),
       ),
       body: Column(
         children: <Widget>[
@@ -61,25 +61,25 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
                 margin: EdgeInsets.all(25.0),
                 width: 80.0,
                 height: 80.0,
-                color: Colors.amberAccent,
+                color: Color(0xFFAD9090),
                 alignment: Alignment.center,
-                child: const Text('14 \n Armor Class', style: TextStyle(fontSize: 18)),
+                child: const Text('14 \n Armor Class', style: TextStyle(fontSize: 18), textAlign: TextAlign.center),
               ),
               Container(
                 margin: EdgeInsets.all(25.0),
                 width: 80.0,
                 height: 80.0,
-                color: Colors.amberAccent,
+                color: Color(0xFFAD9090),
                 alignment: Alignment.center,
-                child: const Text('+3 \nInitiative', style: TextStyle(fontSize: 18)),
+                child: const Text('+3 \nInitiative', style: TextStyle(fontSize: 18), textAlign: TextAlign.center),
               ),
               Container(
                 margin: EdgeInsets.all(25.0),
                 width: 80.0,
                 height: 80.0,
-                color: Colors.amberAccent,
+                color: Color(0xFFAD9090),
                 alignment: Alignment.center,
-                child: const Text('30 \nSpeed', style: TextStyle(fontSize: 18)),
+                child: const Text('30 \nSpeed', style: TextStyle(fontSize: 18), textAlign: TextAlign.center),
               ),
             ],
           ),
@@ -89,17 +89,17 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
                 margin: EdgeInsets.all(25.0),
                 width: 80.0,
                 height: 80.0,
-                color: Colors.amberAccent,
+                color: Color(0xFFAD9090),
                 alignment: Alignment.center,
-                child: const Text('+2 \n Proficiency', style: TextStyle(fontSize: 18)),
+                child: const Text('+2 \n Proficiency', style: TextStyle(fontSize: 18), textAlign: TextAlign.center),
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(25, 25, 0, 25),
                 width: 80.0,
                 height: 80.0,
-                color: Colors.amberAccent,
+                color: Color(0xFFAD9090),
                 alignment: Alignment.center,
-                child: Text('${hp}/15 \n Hit Points', style: TextStyle(fontSize: 18)),
+                child: Text('${hp}/15 \n Hit Points', style: TextStyle(fontSize: 18), textAlign: TextAlign.center),
               ),
               Container(
                 margin: EdgeInsets.all(0.0),
@@ -134,9 +134,9 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
                 margin: EdgeInsets.fromLTRB(10, 25, 25, 25),
                 width: 80.0,
                 height: 80.0,
-                color: Colors.amberAccent,
+                color: Color(0xFFAD9090),
                 alignment: Alignment.center,
-                child: const Text('1d10 \nHit Dice', style: TextStyle(fontSize: 18)),
+                child: const Text('1d10 \nHit Dice', style: TextStyle(fontSize: 18), textAlign: TextAlign.center),
               ),
             ],
           ),
@@ -144,9 +144,9 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
             margin: EdgeInsets.all(25.0),
             width: 400.0,
             height: 300.0,
-            color: Colors.amberAccent,
+            color: Color(0xFFAD9090),
             alignment: Alignment.center,
-              child: const Text('Ability Scores', style: TextStyle(fontSize: 18))
+              child: const Text('Ability Scores', style: TextStyle(fontSize: 18), textAlign: TextAlign.center)
           ),
           TextButton(
             style: TextButton.styleFrom(
