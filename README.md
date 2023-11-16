@@ -4,9 +4,10 @@ A character sheet app for Dungeons & Dragons Fifth Edition players.
 
 ## How To Use
 
-1. Run main.dart in an Android Emulator.
+1. Run main.dart in an Android/iOS Emulator.
 2. Tap/click buttons to navigate app.
-  - First page is the "Character List", where you can choose to load an existing character sheet by pressing their respective button, or start to create a new character by pressing the "Create Character Button"
+  - First page is the "Character List", where you can choose to load an existing character sheet by pressing their respective button, or start to create a new character by pressing the "Create Character" button
+  - ***the "+" and "-" buttons next to health increment and decrement the current health by one***
 
 ## 11/16/23 - Deliverable 3 Progress
 
