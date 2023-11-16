@@ -25,7 +25,7 @@ A character sheet app for Dungeons & Dragons Fifth Edition players.
     -  getters for the model to link data to the view
     -  toString methods for feature lists and proficiency lists
   - View has
-    - a built scaffold of an initial character sheet screen
+    - a built scaffold of an initial character sheet screen with data binding to the character model constructed in the view model
     - ***"+" and "-" buttons next to health to make steps toward achieving the task of resource management***
     - an appBar and back button
    
