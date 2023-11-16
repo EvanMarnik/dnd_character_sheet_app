@@ -135,9 +135,12 @@ class CharacterSheetViewModel extends ChangeNotifier {
         for (int i = 0; i < charClass.features.length; i++) {
             features += "${charClass.features[i].name}: ${charClass.features[i].desc}\n\n";
         }
-        features += "\nSubclass Features: \n\n";
-        for (int i = 0; i < subclass!.features.length; i++) {
-            features += "${subclass.features[i].name}: ${subclass.features[i].desc}\n\n";
+        if(subclass != null) {
+          features += "\nSubclass Features: \n\n";
+          for (int i = 0; i < subclass!.features.length; i++) {
+            features +=
+            "${subclass.features[i].name}: ${subclass.features[i].desc}\n\n";
+          }
         }
         features += "\nRace Features: \n\n";
         for (int i = 0; i < race.features.length; i++) {
