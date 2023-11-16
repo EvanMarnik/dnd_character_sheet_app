@@ -257,9 +257,9 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
             Container(
               margin: EdgeInsets.fromLTRB(25.0, 0, 25.0, 0),
               width: 400.0,
-              height: 300.0,
+              height: 1650.0,
               color: Color(0xFFAD9090),
-              //child: Text(vm.featuresToString(), style: TextStyle(fontSize: 18, color: Colors.black), textAlign: TextAlign.center),
+              child: Text(vm.featuresToString(), style: TextStyle(fontSize: 18, color: Colors.black), textAlign: TextAlign.center),
             ),
           ],
         )
