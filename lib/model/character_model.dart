@@ -1,5 +1,6 @@
 import 'package:dnd_character_sheet_app/model/feature.dart';
 import 'package:dnd_character_sheet_app/model/character_option.dart';
+import 'package:dnd_character_sheet_app/model/spell.dart';
 
 class CharacterModel {
     String name;
@@ -10,7 +11,7 @@ class CharacterModel {
     CharacterOption race;
 
     List<int> abilityScores;
-    List<String>? spells;
+    List<Spell>? spells;
     int? maxSpellSlots;
     int? currSpellSlots;
     int maxHitPoints;
@@ -101,8 +102,8 @@ class CharacterModel {
     List<int> get getAbilityModifiers => abilityModifiers;
     set setAbilityModifiers(List<int> abilityModifiers) => this.abilityModifiers = abilityModifiers;
 
-    List<String>? get getSpells => spells;
-    set setSpells(List<String> spells) => this.spells = spells;
+    List<Spell>? get getSpells => spells;
+    set setSpells(List<Spell> spells) => this.spells = spells;
 
     int? get getCurrSpellSlots => currSpellSlots;
     set setCurrSpellSlots(int currSpellSlots) => this.currSpellSlots = currSpellSlots;

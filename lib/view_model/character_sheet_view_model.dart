@@ -1,6 +1,7 @@
 import 'package:dnd_character_sheet_app/model/character_model.dart';
 import 'package:dnd_character_sheet_app/model/character_option.dart';
 import 'package:dnd_character_sheet_app/model/feature.dart';
+import 'package:dnd_character_sheet_app/model/spell.dart';
 
 import 'package:flutter/material.dart';
 
@@ -71,7 +72,7 @@ class CharacterSheetViewModel extends ChangeNotifier {
 
     List<int> get abilityModifiers => character_model.abilityModifiers;
 
-    List<String>? get spells => character_model.spells;
+    List<Spell>? get spells => character_model.spells;
 
     int? get maxSpellSlots => character_model.maxSpellSlots;
 
@@ -92,7 +93,7 @@ class CharacterSheetViewModel extends ChangeNotifier {
     }
 
     // resource methods for the class
-    void addSpell(String spell) {
+    void addSpell(Spell spell) {
         spells?.add(spell);
     }
 
