@@ -4,17 +4,29 @@ import 'router.dart' as LocalRouter;
 import 'constants.dart';
 
 import 'package:dnd_character_sheet_app/view/character_list_view.dart';
+import 'package:dnd_character_sheet_app/view_model/character_list_view_model.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late CharacterListViewModel characterListViewModel;
+
+  _MyAppState() {
+    characterListViewModel = CharacterListViewModel();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          body: CharacterListView(),
+          body: CharacterListView(characterListViewModel: characterListViewModel),
       ),
       onGenerateRoute: LocalRouter.Router.generateRoute,
       initialRoute: listRoute,

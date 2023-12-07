@@ -1,6 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:dnd_character_sheet_app/view_model/character_list_view_model.dart';
 
-class CharacterCreatorView extends StatelessWidget {
+class CharacterCreatorView extends StatefulWidget {
+  CharacterListViewModel characterListViewModel;
+
+  CharacterCreatorView(this.characterListViewModel);
+
+  @override
+  State<CharacterCreatorView> createState() => _CharacterCreatorViewState(characterListViewModel: characterListViewModel);
+}
+
+class _CharacterCreatorViewState extends State<CharacterCreatorView> {
+  CharacterListViewModel characterListViewModel;
+
+  _CharacterCreatorViewState({required this.characterListViewModel});
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build

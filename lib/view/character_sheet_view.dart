@@ -5,26 +5,25 @@ import 'package:dnd_character_sheet_app/view_model/character_sheet_view_model.da
 // import 'package:provider/provider.dart';
 
 class CharacterSheetView extends StatefulWidget {
-  // const CharacterSheetView({super.key});
-  final int charID;
+  CharacterModel characterModel;
 
-  CharacterSheetView(this.charID);
+  CharacterSheetView(this.characterModel);
 
   @override
-  State<CharacterSheetView> createState() => _CharacterSheetViewState();
+  State<CharacterSheetView> createState() => _CharacterSheetViewState(this.characterModel);
 }
 
 class _CharacterSheetViewState extends State<CharacterSheetView> {
   final TextEditingController _controller = TextEditingController();
   late CharacterSheetViewModel vm;
-  // int hp = 15;
-  // int maxHP = 15;
+  CharacterModel characterModel;
+
+  _CharacterSheetViewState(this.characterModel);
 
   @override
   void initState() {
     super.initState();
-    // TODO hard coded sheet for now
-    vm = CharacterSheetViewModel(charID: 0);
+    vm = CharacterSheetViewModel(characterModel: characterModel);
   }
 
   void incrementHealth() {

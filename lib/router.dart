@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:dnd_character_sheet_app/model/character_model.dart';
+
 import 'package:dnd_character_sheet_app/view_model/character_creator_view_model.dart';
 import 'package:dnd_character_sheet_app/view_model/character_list_view_model.dart';
 import 'package:dnd_character_sheet_app/view_model/character_sheet_view_model.dart';
@@ -17,25 +19,27 @@ class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case listRoute:
+        var characterListViewModel = settings.arguments as CharacterListViewModel;
         return MaterialPageRoute(builder: (_) =>
             ChangeNotifierProvider(
               create: (context) => CharacterListViewModel(),
-              child: CharacterListView(),
+              child: CharacterListView(characterListViewModel: characterListViewModel),
             )
         );
       case sheetRoute:
-        var charID = settings.arguments as int;
+        var characterModel = settings.arguments as CharacterModel;
         return MaterialPageRoute(builder: (_) =>
             ChangeNotifierProvider(
-                create: (context) => CharacterSheetViewModel(charID: charID),
-                child: CharacterSheetView(charID),
+                create: (context) => CharacterSheetViewModel(characterModel: characterModel),
+                child: CharacterSheetView(characterModel),
             )
         );
       case creatorRoute:
+        var characterListViewModel = settings.arguments as CharacterListViewModel;
         return MaterialPageRoute(builder: (_) =>
             ChangeNotifierProvider(
-                create: (context) => CharacterCreatorViewModel(),
-                child: CharacterCreatorView(),
+                create: (context) => CharacterCreatorViewModel(characterListViewModel: characterListViewModel),
+                child: CharacterCreatorView(characterListViewModel),
             )
         );
       default:

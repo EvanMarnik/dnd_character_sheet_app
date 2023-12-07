@@ -2,7 +2,23 @@ import 'package:flutter/material.dart';
 
 import 'package:dnd_character_sheet_app/constants.dart';
 
-class CharacterListView extends StatelessWidget {
+import 'package:dnd_character_sheet_app/view_model/character_list_view_model.dart';
+
+class CharacterListView extends StatefulWidget {
+  CharacterListViewModel characterListViewModel;
+
+  CharacterListView({required this.characterListViewModel});
+
+  @override
+  State<CharacterListView> createState() => _CharacterListViewState(characterListViewModel: characterListViewModel);
+}
+
+class _CharacterListViewState extends State<CharacterListView> {
+
+  CharacterListViewModel characterListViewModel;
+
+  _CharacterListViewState({required this.characterListViewModel});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,20 +38,33 @@ class CharacterListView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 SizedBox(
-                  width: 300,
-                  child: FilledButton(
-                    style: FilledButton.styleFrom(
-                      textStyle: const TextStyle(fontSize: 20),
-                    ),
-                    onPressed: (){
-                      Navigator.pushNamed(context, sheetRoute, arguments: 0);
-                    },
-                    child: const Text(
-                        'Coddrin Thunderslayer\nHalf-Orc\nBarbarian\nFolk Hero',
-                        textAlign: TextAlign.center
-                    ),
-                  ),
-                ),
+                  width: MediaQuery.of(context).size.width*0.8,
+                  height: MediaQuery.of(context).size.height*0.8,
+                  child: ListView.builder(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      itemCount: characterListViewModel.characterList.length,
+                      scrollDirection: Axis.vertical,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width*0.7,
+                              child: FilledButton(
+                                style: FilledButton.styleFrom(
+                                  textStyle: const TextStyle(fontSize: 20),
+                                ),
+                                onPressed: (){
+                                  Navigator.pushNamed(context, sheetRoute, arguments: characterListViewModel.characterList[index]);
+                                },
+                                child: Text(
+                                    '${characterListViewModel.characterList[index].name}\n${characterListViewModel.characterList[index].race.name}\n${characterListViewModel.characterList[index].charClass.name}\n${characterListViewModel.characterList[index].background.name}',
+                                    textAlign: TextAlign.center
+                                ),
+                              ),
+                            )
+                        );
+                      }
+                  )
+                )
               ]
             ),
             Row(
@@ -49,7 +78,7 @@ class CharacterListView extends StatelessWidget {
                       textStyle: const TextStyle(fontSize: 25),
                     ),
                     onPressed: (){
-                      Navigator.pushNamed(context, creatorRoute, arguments: null);
+                      Navigator.pushNamed(context, creatorRoute, arguments: characterListViewModel);
                     },
                     child: const Text('Create Character'),
                   )
