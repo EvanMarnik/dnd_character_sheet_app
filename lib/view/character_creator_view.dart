@@ -30,7 +30,7 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   const Text(
-                    'Select Character',
+                    'Select Class',
                     style: TextStyle(
                       color: Color(0xFFAD9090),
                     ),
@@ -44,7 +44,7 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                             height: MediaQuery.of(context).size.height*0.8,
                             child: ListView.builder(
                                 physics: const AlwaysScrollableScrollPhysics(),
-                                itemCount: characterListViewModel.characterList.length,
+                                itemCount: classes.length,
                                 scrollDirection: Axis.vertical,
                                 itemBuilder: (BuildContext context, int index) {
                                   return Container(
@@ -58,7 +58,7 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                                             Navigator.pushNamed(context, sheetRoute, arguments: characterListViewModel.characterList[index]);
                                           },
                                           child: Text(
-                                              '${characterListViewModel.characterList[index].name}\n${characterListViewModel.characterList[index].race.name}\n${characterListViewModel.characterList[index].charClass.name}\n${characterListViewModel.characterList[index].background.name}',
+                                              classes[index].name,
                                               textAlign: TextAlign.center
                                           ),
                                         ),
