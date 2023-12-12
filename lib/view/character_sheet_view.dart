@@ -81,7 +81,7 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
                       border: Border.all(color:const Color(0xFF302727)),
                       borderRadius: BorderRadius.circular(10)
                   ),
-                  child: Text('+${vm.abilityModifiers[1]} \nInitiative',
+                  child: Text('${vm.abilityModifiers[1]} \nInitiative',
                       style: TextStyle(fontSize: 18),
                       textAlign: TextAlign.center),
                 ),

@@ -20,8 +20,15 @@ class CharacterCreatorView extends StatefulWidget {
 
 class _CharacterCreatorViewState extends State<CharacterCreatorView> {
   CharacterListViewModel characterListViewModel;
+  late CharacterCreatorViewModel vm;
 
   _CharacterCreatorViewState({required this.characterListViewModel});
+
+  @override
+  void initState() {
+    super.initState();
+    vm = CharacterCreatorViewModel(characterListViewModel: characterListViewModel);
+  }
 
   CharacterOption? selectedClass = barbarian;
   CharacterOption? selectedRace = dragonborn;
@@ -129,24 +136,15 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                   textStyle: const TextStyle(fontSize: 25),
                 ),
                 onPressed: () {
+                  vm.setCharClass(selectedClass!);
+                  vm.setRace(selectedRace!);
+                  vm.setBackground(selectedBG!);
+                  vm.setName(selectedName);
+                  vm.constructCharacter();
+                  Navigator.pushNamed(context, listRoute,
+                      arguments: characterListViewModel);
                   Navigator.pushNamed(context, sheetRoute,
-                      arguments: CharacterModel(
-                        name: selectedName,
-                        charClass: selectedClass!,
-                        subclass: null,
-                        background: selectedBG!,
-                        race: selectedRace!,
-                        abilityScores: [16, 14, 16, 8, 10, 8],
-                        spells: null,
-                        maxSpellSlots: null,
-                        currSpellSlots: null,
-                        maxHitPoints: 15,
-                        currHitPoints: 15,
-                        armorClass: 15,
-                        speed: 30,
-                        hitDice: 12,
-                      ));
-                  //CharacterCreatorViewModel(characterListViewModel: characterListViewModel).constructCharacter();
+                      arguments: vm.character);
                 },
                 child: const Text('Create Character'),
               ))

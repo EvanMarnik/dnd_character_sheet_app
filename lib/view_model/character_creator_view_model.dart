@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:dnd_character_sheet_app/constants.dart';
 
 import 'package:dnd_character_sheet_app/model/character_model.dart';
 import 'package:dnd_character_sheet_app/model/character_option.dart';
@@ -8,20 +9,36 @@ import 'package:dnd_character_sheet_app/view_model/character_list_view_model.dar
 
 class CharacterCreatorViewModel extends ChangeNotifier{
     CharacterListViewModel characterListViewModel;
-    late CharacterOption charClass;
-    late CharacterOption? subclass;
-    late CharacterOption background;
-    late CharacterOption race;
+    late CharacterOption charClass = barbarian;
+    late CharacterOption? subclass = null;
+    late CharacterOption background = acolyte;
+    late CharacterOption race = dragonborn;
     late List<int> abilityScores = [0, 0, 0, 0, 0, 0];
     late List<Spell>? spells = [];
     late String name = "";
 
-    late int? maxSpellSlots;
-    late int? currSpellSlots;
-    late int maxHitPoints;
-    late int currHitPoints;
-    late int? hitDice;
+    late int? maxSpellSlots = null;
+    late int? currSpellSlots = null;
+    late int maxHitPoints = 0;
+    late int currHitPoints = 0;
+    late int hitDice = 0;
 
+    late CharacterModel character = CharacterModel(
+        name: "Null",
+        charClass: barbarian,
+        subclass: null,
+        background: acolyte,
+        race: dragonborn,
+        abilityScores: [0, 0, 0, 0, 0, 0],
+        spells: null,
+        maxSpellSlots: null,
+        currSpellSlots: null,
+        maxHitPoints: 0,
+        currHitPoints: 0,
+        armorClass: 0,
+        speed: 30,
+        hitDice: 0,
+    );
 
     CharacterCreatorViewModel({required this.characterListViewModel});
 
@@ -92,11 +109,11 @@ class CharacterCreatorViewModel extends ChangeNotifier{
     }
     int get getCurrHitPoints => currHitPoints;
 
-    void setHitDice(int? hitDice) {
+    void setHitDice(int hitDice) {
         this.hitDice = hitDice;
         notifyListeners();
     }
-    int? get getHitDice => hitDice;
+    int get getHitDice => hitDice;
 
     void constructCharacter() {
         List<int> skillProficiencyNums = [];
@@ -157,24 +174,25 @@ class CharacterCreatorViewModel extends ChangeNotifier{
         
         int armorClass = 10+abilityModifiers[1];
 
-        // add character to list
-        characterListViewModel.addCharacter(
-            CharacterModel(
-                name: name,
-                charClass: charClass,
-                subclass: subclass,
-                race: race,
-                background: background,
-                abilityScores: abilityScores,
-                spells: spells,
-                maxSpellSlots: maxSpellSlots,
-                currSpellSlots: currSpellSlots,
-                maxHitPoints: maxHitPoints,
-                currHitPoints: currHitPoints,
-                armorClass: armorClass,
-                speed: 30,
-                hitDice: determinedHitDice,
-            )
+        // create character
+        character = CharacterModel(
+            name: name,
+            charClass: charClass,
+            subclass: subclass,
+            race: race,
+            background: background,
+            abilityScores: abilityScores,
+            spells: spells,
+            maxSpellSlots: maxSpellSlots,
+            currSpellSlots: currSpellSlots,
+            maxHitPoints: maxHitPoints,
+            currHitPoints: currHitPoints,
+            armorClass: armorClass,
+            speed: 30,
+            hitDice: determinedHitDice,
         );
+
+        // add character to list
+        characterListViewModel.addCharacter(character);
     }
 }
