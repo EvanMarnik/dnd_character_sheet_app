@@ -17,7 +17,8 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
 
   _CharacterCreatorViewState({required this.characterListViewModel});
   String value = "";
-  List<String> list = <String>['Barbarian', 'Bard', 'Cleric', 'Druid'];
+  List<String> classList = ['Barbarian','Bard','Cleric','Druid','Fighter','Monk','Paladin','Ranger','Rogue','Sorcerer','Warlock','Wizard'];
+  List<String> raceList = ['Dragonborn','Dwarf','Elf','Gnome','Half Elf','Halfling','Half Orc','Human','Tiefling'];
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -40,10 +41,10 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
               DropdownMenu(
 
                 dropdownMenuEntries:
-                    list.map<DropdownMenuEntry<String>>((String value) {
+                    classList.map<DropdownMenuEntry<String>>((String value) {
                   return DropdownMenuEntry<String>(value: value, label: value);
                 }).toList(),
-                initialSelection: list.first,
+                initialSelection: classList.first,
 
                 menuStyle: MenuStyle(
                   backgroundColor: MaterialStatePropertyAll<Color>(Color(0xFFAD9090))
@@ -58,10 +59,10 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                   DropdownMenu(
 
                     dropdownMenuEntries:
-                    list.map<DropdownMenuEntry<String>>((String value) {
+                    raceList.map<DropdownMenuEntry<String>>((String value) {
                       return DropdownMenuEntry<String>(value: value, label: value);
                     }).toList(),
-                    initialSelection: list.first,
+                    initialSelection: raceList.first,
 
                     menuStyle: MenuStyle(
                         backgroundColor: MaterialStatePropertyAll<Color>(Color(0xFFAD9090))
