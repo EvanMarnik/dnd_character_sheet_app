@@ -8,26 +8,28 @@ class CharacterCreatorView extends StatefulWidget {
   CharacterCreatorView(this.characterListViewModel);
 
   @override
-  State<CharacterCreatorView> createState() => _CharacterCreatorViewState(characterListViewModel: characterListViewModel);
+  State<CharacterCreatorView> createState() => _CharacterCreatorViewState(
+      characterListViewModel: characterListViewModel);
 }
 
 class _CharacterCreatorViewState extends State<CharacterCreatorView> {
   CharacterListViewModel characterListViewModel;
 
   _CharacterCreatorViewState({required this.characterListViewModel});
-
+  String value = "";
+  List<String> list = <String>['Barbarian', 'Bard', 'Cleric', 'Druid'];
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(
-            backgroundColor: Color(0xFFAD9090),
-          title: const Text('Character Creator', style: TextStyle(color: const Color(0xFF302727))),
+          backgroundColor: Color(0xFFAD9090),
+          title: const Text('Character Creator',
+              style: TextStyle(color: const Color(0xFF302727))),
         ),
         body: Center(
+
             child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   const Text(
                     'Select Class',
@@ -35,43 +37,36 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                       color: Color(0xFFAD9090),
                     ),
                   ),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(
-                            width: MediaQuery.of(context).size.width*0.8,
-                            height: MediaQuery.of(context).size.height*0.8,
-                            child: ListView.builder(
-                                physics: const AlwaysScrollableScrollPhysics(),
-                                itemCount: classes.length,
-                                scrollDirection: Axis.vertical,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Container(
-                                      child: SizedBox(
-                                        width: MediaQuery.of(context).size.width*0.7,
-                                        child: FilledButton(
-                                          style: FilledButton.styleFrom(
-                                            textStyle: const TextStyle(fontSize: 20),
-                                          ),
-                                          onPressed: (){
-                                            Navigator.pushNamed(context, sheetRoute, arguments: characterListViewModel.characterList[index]);
-                                          },
-                                          child: Text(
-                                              classes[index].name,
-                                              textAlign: TextAlign.center
-                                          ),
-                                        ),
-                                      )
-                                  );
-                                }
-                            )
-                        )
-                      ]
+              DropdownMenu(
+
+                dropdownMenuEntries:
+                    list.map<DropdownMenuEntry<String>>((String value) {
+                  return DropdownMenuEntry<String>(value: value, label: value);
+                }).toList(),
+                initialSelection: list.first,
+
+                menuStyle: MenuStyle(
+                  backgroundColor: MaterialStatePropertyAll<Color>(Color(0xFFAD9090))
+                ),
+              ),
+                  const Text(
+                    'Select Race',
+                    style: TextStyle(
+                      color: Color(0xFFAD9090),
+                    ),
                   ),
-                ]
-            )
-        )
-    );
+                  DropdownMenu(
+
+                    dropdownMenuEntries:
+                    list.map<DropdownMenuEntry<String>>((String value) {
+                      return DropdownMenuEntry<String>(value: value, label: value);
+                    }).toList(),
+                    initialSelection: list.first,
+
+                    menuStyle: MenuStyle(
+                        backgroundColor: MaterialStatePropertyAll<Color>(Color(0xFFAD9090))
+                    ),
+                  )
+            ])));
   }
 }
