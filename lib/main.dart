@@ -52,6 +52,12 @@ class _MyAppState extends State<MyApp> {
             side: const BorderSide(width: 5.0, color: Color(0xFF302727)),
           ),
         ),
+
+        scrollbarTheme: const ScrollbarThemeData(
+          radius: Radius.circular(10),
+          thumbColor: MaterialStatePropertyAll(Color(0xFFAD9090)),
+          mainAxisMargin: 10.0,
+        )
       ),
     );
 

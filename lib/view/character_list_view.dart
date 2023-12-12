@@ -22,7 +22,8 @@ class _CharacterListViewState extends State<CharacterListView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Container(
+        margin: EdgeInsets.fromLTRB(0, MediaQuery.of(context).size.width*0.1, 0, MediaQuery.of(context).size.width*0.1),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -39,8 +40,8 @@ class _CharacterListViewState extends State<CharacterListView> {
               children: <Widget>[
                 SizedBox(
                   width: MediaQuery.of(context).size.width*0.8,
-                  height: MediaQuery.of(context).size.height*0.8,
-                  child: ListView.builder(
+                  height: MediaQuery.of(context).size.height*0.7,
+                  child: Scrollbar(child: ListView.builder(
                       physics: const AlwaysScrollableScrollPhysics(),
                       itemCount: characterListViewModel.characterList.length,
                       scrollDirection: Axis.vertical,
@@ -63,7 +64,7 @@ class _CharacterListViewState extends State<CharacterListView> {
                             )
                         );
                       }
-                  )
+                  ))
                 )
               ]
             ),

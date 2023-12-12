@@ -4,6 +4,7 @@ import 'package:dnd_character_sheet_app/model/feature.dart';
 import 'package:dnd_character_sheet_app/model/spell.dart';
 
 import 'package:flutter/material.dart';
+import 'package:dnd_character_sheet_app/constants.dart';
 
 class CharacterSheetViewModel extends ChangeNotifier {
     late CharacterModel characterModel;
@@ -44,6 +45,14 @@ class CharacterSheetViewModel extends ChangeNotifier {
     int get speed => characterModel.speed;
 
     int get hitDice => characterModel.hitDice;
+
+    int get currHitDice => characterModel.currHitDice;
+
+    int get maxHitDice => characterModel.maxHitDice;
+
+    String get inventory => characterModel.inventory;
+
+    List<String> get attackList => characterModel.attackList;
 
     List<int> getSavingThrows() {
       return characterModel.getSavingThrows();
@@ -87,6 +96,38 @@ class CharacterSheetViewModel extends ChangeNotifier {
         updateSpellSlots(characterModel.getCurrSpellSlots!-spellSlots);
     }
 
+    void addHitDice(int hitDice) {
+        updateHitDice(characterModel.getCurrHitDice+hitDice);
+    }
+
+    void updateHitDice(int hitDice) {
+        characterModel.currHitDice = hitDice;
+    }
+
+    void removeHitDice(int hitDice) {
+        updateHitDice(characterModel.getCurrHitDice-hitDice);
+    }
+
+    void addAC(int ac) {
+        updateAC(characterModel.getArmorClass+ac);
+    }
+
+    void updateAC(int ac) {
+        characterModel.armorClass = ac;
+    }
+
+    void removeAC(int ac) {
+        updateAC(characterModel.getArmorClass-ac);
+    }
+
+    void updateInventory(String inventory) {
+        characterModel.inventory = inventory;
+    }
+
+    void updateAttackList(String value) {
+        characterModel.attackList.add(value);
+    }
+
     // return all features to a string for features page
     String featuresToString() {
         String features = "Class Features: \n\n";
@@ -118,9 +159,28 @@ class CharacterSheetViewModel extends ChangeNotifier {
 
     // return all other proficiencies to a string for proficiencies page
     String proficienciesToString() {
-        String proficiencies = "Other Proficiencies: \n\n";
+        String proficiencies = "Skill Proficiencies: \n\n"
+        "\t${characterModel.skillProficiencyNums.contains(ACROBATICS) ? characterModel.abilityModifiers[1]+2 : characterModel.abilityModifiers[1]}\t\tAcrobatics\n"
+        "\t${characterModel.skillProficiencyNums.contains(ANIMAL_HANDLING) ? characterModel.abilityModifiers[4]+2 : characterModel.abilityModifiers[4]}\t\tAnimal Handling\n"
+        "\t${characterModel.skillProficiencyNums.contains(ARCANA) ? characterModel.abilityModifiers[3]+2 : characterModel.abilityModifiers[3]}\t\tArcana\n"
+        "\t${characterModel.skillProficiencyNums.contains(ATHLETICS) ? characterModel.abilityModifiers[0]+2 : characterModel.abilityModifiers[0]}\t\tAthletics\n"
+        "\t${characterModel.skillProficiencyNums.contains(DECEPTION) ? characterModel.abilityModifiers[5]+2 : characterModel.abilityModifiers[5]}\t\tDeception\n"
+        "\t${characterModel.skillProficiencyNums.contains(HISTORY) ? characterModel.abilityModifiers[3]+2 : characterModel.abilityModifiers[3]}\t\tHistory\n"
+        "\t${characterModel.skillProficiencyNums.contains(INSIGHT) ? characterModel.abilityModifiers[4]+2 : characterModel.abilityModifiers[4]}\t\tInsight\n"
+        "\t${characterModel.skillProficiencyNums.contains(INTIMIDATION) ? characterModel.abilityModifiers[5]+2 : characterModel.abilityModifiers[5]}\t\tIntimidation\n"
+        "\t${characterModel.skillProficiencyNums.contains(INVESTIGATION) ? characterModel.abilityModifiers[3]+2 : characterModel.abilityModifiers[3]}\t\tInvestigation\n"
+        "\t${characterModel.skillProficiencyNums.contains(MEDICINE) ? characterModel.abilityModifiers[4]+2 : characterModel.abilityModifiers[4]}\t\tMedicine\n"
+        "\t${characterModel.skillProficiencyNums.contains(NATURE) ? characterModel.abilityModifiers[3]+2 : characterModel.abilityModifiers[3]}\t\tNature\n"
+        "\t${characterModel.skillProficiencyNums.contains(PERCEPTION) ? characterModel.abilityModifiers[4]+2 : characterModel.abilityModifiers[4]}\t\tPerception\n"
+        "\t${characterModel.skillProficiencyNums.contains(PERFORMANCE) ? characterModel.abilityModifiers[5]+2 : characterModel.abilityModifiers[5]}\t\tPerformance\n"
+        "\t${characterModel.skillProficiencyNums.contains(PERSUASION) ? characterModel.abilityModifiers[5]+2 : characterModel.abilityModifiers[5]}\t\tPersuasion\n"
+        "\t${characterModel.skillProficiencyNums.contains(RELIGION) ? characterModel.abilityModifiers[3]+2 : characterModel.abilityModifiers[3]}\t\tReligion\n"
+        "\t${characterModel.skillProficiencyNums.contains(SLEIGHT_OF_HAND) ? characterModel.abilityModifiers[1]+2 : characterModel.abilityModifiers[1]}\t\tSleight of Hand\n"
+        "\t${characterModel.skillProficiencyNums.contains(STEALTH) ? characterModel.abilityModifiers[1]+2 : characterModel.abilityModifiers[1]}\t\tStealth\n"
+        "\t${characterModel.skillProficiencyNums.contains(SURVIVAL) ? characterModel.abilityModifiers[4]+2 : characterModel.abilityModifiers[4]}\t\tSurvival\n\n"
+        "Other Proficiencies: \n\n";
         for (int i = 0; i < characterModel.otherProficiencies.length; i++) {
-            proficiencies += characterModel.otherProficiencies[i] + "\n\n";
+            proficiencies += "${characterModel.otherProficiencies[i]}\n";
         }
         return proficiencies;
     }

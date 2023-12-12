@@ -24,6 +24,10 @@ class CharacterModel {
     late List<int> skillProficiencyNums = [];
     late List<String> otherProficiencies = [];
     late List<int> abilityModifiers = [];
+    late int currHitDice = 1;
+    late int maxHitDice = 1;
+    late String inventory = "+ Add Items";
+    late List<String> attackList = [];
 
     CharacterModel({
         required this.name,
@@ -125,6 +129,18 @@ class CharacterModel {
 
     int get getHitDice => hitDice;
     set setHitDice(int hitDice) => this.hitDice = hitDice;
+
+    int get getCurrHitDice => currHitDice;
+    set setCurrHitDice(int currHitDice) => this.currHitDice = currHitDice;
+
+    int get getMaxHitDice => maxHitDice;
+    set setMaxHitDice(int maxHitDice) => this.maxHitDice = maxHitDice;
+
+    String get getInventory => inventory;
+    set setInventory(String inventory) => this.inventory = inventory;
+
+    List<String> get getAttackList => attackList;
+    set setAttackList(List<String> attackList) => this.attackList = attackList;
 
     List<int> getSavingThrows() {
         switch (charClass.name) {
