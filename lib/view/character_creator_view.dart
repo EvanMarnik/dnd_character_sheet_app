@@ -411,20 +411,20 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
         ),
         body: SingleChildScrollView(
             child: Column(children: <Widget>[
-          TextField(
+          SizedBox(width: MediaQuery.of(context).size.width*0.875, child: Padding(padding: EdgeInsets.symmetric(vertical: 15), child: TextField(
               decoration: InputDecoration(
                   hintText: 'Enter Name',
                   iconColor: Color(0xFFAD9090),
-                  contentPadding: EdgeInsets.symmetric(horizontal: 40)),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 10)),
               onChanged: (text) {
                 selectedName = text;
-              }),
-              const Text(
+              })),),
+              Padding(padding: EdgeInsets.symmetric(vertical: 15), child: const Text(
                 'Select Class',
                 style: TextStyle(
                   color: Color(0xFF302727),
                 ),
-              ),
+              )),
               DropdownMenu(
                   dropdownMenuEntries: classList
                       .map<DropdownMenuEntry<CharacterOption>>(
@@ -445,12 +445,12 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                     width: MediaQuery.of(context).size.width*0.8,
                     child: getClassCustomization(),
                   )),
-              const Text(
+              Padding(padding: EdgeInsets.symmetric(vertical: 15), child: const Text(
                 'Select Race',
                 style: TextStyle(
                   color: Color(0xFF302727),
                 ),
-              ),
+              )),
               DropdownMenu(
                   dropdownMenuEntries: raceList
                       .map<DropdownMenuEntry<CharacterOption>>(
@@ -471,12 +471,12 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                 width: MediaQuery.of(context).size.width*0.8,
                 child: getRaceCustomization(),
               )),
-              const Text(
+              Padding(padding: EdgeInsets.symmetric(vertical: 15), child: const Text(
                 'Select Background',
                 style: TextStyle(
                   color: Color(0xFF302727),
                 ),
-              ),
+              )),
               DropdownMenu(
                   dropdownMenuEntries: backgroundList
                       .map<DropdownMenuEntry<CharacterOption>>(
@@ -497,106 +497,121 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                     width: MediaQuery.of(context).size.width*0.8,
                     child: getBGCustomization(),
                   )),
-                  const Text(
+              Padding(padding: EdgeInsets.symmetric(vertical: 15), child: const Text(
                     'Select Ability Scores',
                     style: TextStyle(
                       color: Color(0xFF302727),
                     ),
-                  ),
-                  Padding(padding: EdgeInsets.symmetric(vertical: 10), child: SizedBox(
-                    width: 100,
-                    child: TextField(
-                        decoration: InputDecoration(
-                            hintText: 'STR', iconColor: Color(0xFFAD9090)),
-                        keyboardType: TextInputType.number,
-                        inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
+                  )),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Column(
+                        children: <Widget>[
+                          Padding(padding: EdgeInsets.all(10), child: SizedBox(
+                              width: 100,
+                              child: TextField(
+                                  decoration: InputDecoration(
+                                      hintText: 'STR', iconColor: Color(0xFFAD9090)),
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
+                                  onChanged: (text) {
+                                    strength = int.parse(text);
+                                  })
+
+                          )),
+                          Padding(padding: EdgeInsets.all(10), child: SizedBox(
+                              width: 100,
+                              child: TextField(
+                                  decoration: InputDecoration(
+                                      hintText: 'DEX', iconColor: Color(0xFFAD9090)),
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
+                                  onChanged: (text) {
+                                    dexterity = int.parse(text);
+                                  })
+
+                          )),
+                          Padding(padding: EdgeInsets.all(10), child: SizedBox(
+                              width: 100,
+                              child: TextField(
+                                  decoration: InputDecoration(
+                                      hintText: 'CON', iconColor: Color(0xFFAD9090)),
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
+                                  onChanged: (text) {
+                                    constitution = int.parse(text);
+                                  })
+
+                          )),
                         ],
-                        onChanged: (text) {
-                          strength = int.parse(text);
-                        })
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Padding(padding: EdgeInsets.all(10), child: SizedBox(
+                              width: 100,
+                              child: TextField(
+                                  decoration: InputDecoration(
+                                      hintText: 'INT', iconColor: Color(0xFFAD9090)),
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
+                                  onChanged: (text) {
+                                    intelligence = int.parse(text);
+                                  })
 
-                  )),
-                  Padding(padding: EdgeInsets.symmetric(vertical: 10), child: SizedBox(
-                      width: 100,
-                      child: TextField(
-                          decoration: InputDecoration(
-                              hintText: 'DEX', iconColor: Color(0xFFAD9090)),
-                          keyboardType: TextInputType.number,
-                          inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter.digitsOnly
-                          ],
-                          onChanged: (text) {
-                            dexterity = int.parse(text);
-                          })
+                          )),
+                          Padding(padding: EdgeInsets.all(10), child: SizedBox(
+                              width: 100,
+                              child: TextField(
+                                  decoration: InputDecoration(
+                                      hintText: 'WIS', iconColor: Color(0xFFAD9090)),
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
+                                  onChanged: (text) {
+                                    wisdom = int.parse(text);
+                                  })
 
-                  )),
-                  Padding(padding: EdgeInsets.symmetric(vertical: 10), child: SizedBox(
-                      width: 100,
-                      child: TextField(
-                          decoration: InputDecoration(
-                              hintText: 'CON', iconColor: Color(0xFFAD9090)),
-                          keyboardType: TextInputType.number,
-                          inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter.digitsOnly
-                          ],
-                          onChanged: (text) {
-                            constitution = int.parse(text);
-                          })
+                          )),
 
-                  )),
-                  Padding(padding: EdgeInsets.symmetric(vertical: 10), child: SizedBox(
-                      width: 100,
-                      child: TextField(
-                          decoration: InputDecoration(
-                              hintText: 'INT', iconColor: Color(0xFFAD9090)),
-                          keyboardType: TextInputType.number,
-                          inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter.digitsOnly
-                          ],
-                          onChanged: (text) {
-                            intelligence = int.parse(text);
-                          })
+                          Padding(padding: EdgeInsets.all(10), child: SizedBox(
+                              width: 100,
+                              child: TextField(
+                                  decoration: InputDecoration(
+                                      hintText: 'CHA', iconColor: Color(0xFFAD9090)),
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
+                                  onChanged: (text) {
+                                    charisma = int.parse(text);
+                                  })
 
-                  )),
-                  Padding(padding: EdgeInsets.symmetric(vertical: 10), child: SizedBox(
-                      width: 100,
-                      child: TextField(
-                          decoration: InputDecoration(
-                              hintText: 'WIS', iconColor: Color(0xFFAD9090)),
-                          keyboardType: TextInputType.number,
-                          inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter.digitsOnly
-                          ],
-                          onChanged: (text) {
-                            wisdom = int.parse(text);
-                          })
-
-                  )),
-
-                  Padding(padding: EdgeInsets.symmetric(vertical: 10), child: SizedBox(
-                      width: 100,
-                      child: TextField(
-                          decoration: InputDecoration(
-                              hintText: 'CHA', iconColor: Color(0xFFAD9090)),
-                          keyboardType: TextInputType.number,
-                          inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter.digitsOnly
-                          ],
-                          onChanged: (text) {
-                            charisma = int.parse(text);
-                          })
-
-                  )),
+                          )),
+                        ],
+                      )
+                    ],
+                  ),
               selectedClass!.name == "Barbarian" || selectedClass!.name == "Rogue" || selectedClass!.name == "Paladin" || selectedClass!.name == "Ranger" ||
                   selectedClass!.name == "Monk" || selectedClass!.name == "Fighter"
                   ? Container() :
                   Padding(padding: EdgeInsets.symmetric(vertical: 10), child: SizedBox(
                     width: MediaQuery.of(context).size.width*0.8,
                     child: MultiSelectDialogField(
+                      selectedColor: Color(0xFF302727),
                       items: cantrips.map((e) => MultiSelectItem(e, e.name)).toList(),
                       listType: MultiSelectListType.CHIP,
-                      title: Text("Cantrips"),
+                      title: Text("Cantrips", style: TextStyle(color: Color(0xFF302727)),),
                       onConfirm: (values) {
                         selectedCantrips = values;
                       },
@@ -608,9 +623,10 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
             Padding(padding: EdgeInsets.symmetric(vertical: 10), child: SizedBox(
                 width: MediaQuery.of(context).size.width*0.8,
                 child: MultiSelectDialogField(
+                    selectedColor: Color(0xFF302727),
                     items: firstLevel.map((e) => MultiSelectItem(e, e.name)).toList(),
                     listType: MultiSelectListType.CHIP,
-                    title: Text("First Level Spells"),
+                    title: Text("First Level Spells", style: TextStyle(color: Color(0xFF302727)),),
                     onConfirm: (values) {
                       selectedFirstLevel = values;
                     },
