@@ -410,21 +410,15 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
               style: TextStyle(color: const Color(0xFFAD9090))),
         ),
         body: SingleChildScrollView(
-            child: Center(child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Padding(padding: EdgeInsets.symmetric(vertical: 10), child: SizedBox(
-                    width: MediaQuery.of(context).size.width*0.8,
-                    child: TextField(
-                        decoration: InputDecoration(
-                            hintText: 'Enter Name', iconColor: Color(0xFFAD9090)),
-
-                        onChanged: (text) {
-                          selectedName = text;
-                        })
-                  )),
-
+            child: Column(children: <Widget>[
+          TextField(
+              decoration: InputDecoration(
+                  hintText: 'Enter Name',
+                  iconColor: Color(0xFFAD9090),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 40)),
+              onChanged: (text) {
+                selectedName = text;
+              }),
               const Text(
                 'Select Class',
                 style: TextStyle(
@@ -594,6 +588,9 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                           })
 
                   )),
+              selectedClass!.name == "Barbarian" || selectedClass!.name == "Rogue" || selectedClass!.name == "Paladin" || selectedClass!.name == "Ranger" ||
+                  selectedClass!.name == "Monk" || selectedClass!.name == "Fighter"
+                  ? Container() :
                   Padding(padding: EdgeInsets.symmetric(vertical: 10), child: SizedBox(
                     width: MediaQuery.of(context).size.width*0.8,
                     child: MultiSelectDialogField(
@@ -605,6 +602,9 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                       },
                     ),
                   )),
+              selectedClass!.name == "Barbarian" || selectedClass!.name == "Rogue" || selectedClass!.name == "Paladin" || selectedClass!.name == "Ranger" ||
+                  selectedClass!.name == "Monk" || selectedClass!.name == "Fighter"
+                  ? Container() :
             Padding(padding: EdgeInsets.symmetric(vertical: 10), child: SizedBox(
                 width: MediaQuery.of(context).size.width*0.8,
                 child: MultiSelectDialogField(
@@ -649,6 +649,6 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                     },
                     child: const Text('Create Character'),
                   )))
-            ]))));
+            ])));
   }
 }
