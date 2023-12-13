@@ -609,6 +609,7 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                     width: MediaQuery.of(context).size.width*0.8,
                     child: MultiSelectDialogField(
                       selectedColor: Color(0xFF302727),
+                      selectedItemsTextStyle: TextStyle(color:Color(0xFFAD9090)),
                       items: cantrips.map((e) => MultiSelectItem(e, e.name)).toList(),
                       listType: MultiSelectListType.CHIP,
                       title: Text("Cantrips", style: TextStyle(color: Color(0xFF302727)),),
@@ -631,6 +632,7 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                 width: MediaQuery.of(context).size.width*0.8,
                 child: MultiSelectDialogField(
                     selectedColor: Color(0xFF302727),
+                    selectedItemsTextStyle: TextStyle(color:Color(0xFFAD9090)),
                     items: firstLevel.map((e) => MultiSelectItem(e, e.name)).toList(),
                     listType: MultiSelectListType.CHIP,
                     backgroundColor: Color(0xFFAD9090),
