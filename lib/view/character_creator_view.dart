@@ -190,6 +190,22 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                   vm.setHitDice(int.parse(text));
                 });
               }),
+          TextField(
+              decoration: InputDecoration(
+                  hintText: 'Enter Max Spell Slots',
+                  iconColor: Color(0xFFAD9090)
+              ),
+              keyboardType: TextInputType.number,
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.digitsOnly
+              ],
+              onSubmitted: (text) {
+                setState(() {
+                  if (int.parse(text) > 0) {  // only set if above 0
+                    vm.setMaxSpellSlots(int.parse(text));
+                  }
+                });
+              }),
           // form for custom class proficiencies, ask for number of proficiencies then ask for each one
           TextField(
               decoration: InputDecoration(

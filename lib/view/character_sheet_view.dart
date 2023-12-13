@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dnd_character_sheet_app/model/character_model.dart';
+import 'package:dnd_character_sheet_app/model/spell.dart';
 import 'package:dnd_character_sheet_app/view_model/character_sheet_view_model.dart';
 
 // import 'package:provider/provider.dart';
@@ -17,6 +18,7 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
   late TextEditingController _controller;
   late TextEditingController _attackController;
   late CharacterSheetViewModel vm;
+  bool newSpellFlag = false;
   CharacterModel characterModel;
 
   _CharacterSheetViewState(this.characterModel);
@@ -109,6 +111,137 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
     setState(() {
       vm.updateAttackList(value);
     });
+  }
+
+  void flipNewSpellFlag() {
+    setState(() {
+      newSpellFlag = !newSpellFlag;
+    });
+  }
+
+  Column getSpellCustomization() {
+    if (newSpellFlag) {
+      String name = "";
+      String castingTime = "";
+      String school = "";
+      int level = 0;
+      String range = "";
+      String components = "";
+      String duration = "";
+      String desc = "";
+      return Column(
+        children: <Widget>[
+          // form for custom spell
+          Padding(padding:EdgeInsets.fromLTRB(15, 5, 15, 5), child: TextField(
+              decoration: InputDecoration(
+                  hintText: 'Enter Spell Name',
+                  iconColor: Color(0xFFAD9090)
+              ),
+              onChanged: (text) {
+                  name = text;
+              })),
+          Padding(padding:EdgeInsets.fromLTRB(15, 5, 15, 5), child: TextField(
+              decoration: InputDecoration(
+                  hintText: 'Enter Casting Time',
+                  iconColor: Color(0xFFAD9090)
+              ),
+              onChanged: (text) {
+                  castingTime = text;
+              })),
+          Padding(padding:EdgeInsets.fromLTRB(15, 5, 15, 5), child: TextField(
+              decoration: InputDecoration(
+                  hintText: 'Enter School',
+                  iconColor: Color(0xFFAD9090)
+              ),
+              onChanged: (text) {
+                  school = text;
+              })),
+          Padding(padding:EdgeInsets.fromLTRB(15, 5, 15, 5), child: TextField(
+              decoration: InputDecoration(
+                  hintText: 'Enter Level',
+                  iconColor: Color(0xFFAD9090)
+              ),
+              onChanged: (text) {
+                  level = int.parse(text);
+              })),
+          Padding(padding:EdgeInsets.fromLTRB(15, 5, 15, 5), child: TextField(
+              decoration: InputDecoration(
+                  hintText: 'Enter Range',
+                  iconColor: Color(0xFFAD9090)
+              ),
+              onChanged: (text) {
+                  range = text;
+              })),
+          Padding(padding:EdgeInsets.fromLTRB(15, 5, 15, 5), child: TextField(
+              decoration: InputDecoration(
+                  hintText: 'Enter Components',
+                  iconColor: Color(0xFFAD9090)
+              ),
+              onChanged: (text) {
+                  components = text;
+              })),
+          Padding(padding:EdgeInsets.fromLTRB(15, 5, 15, 5), child: TextField(
+              decoration: InputDecoration(
+                  hintText: 'Enter Duration',
+                  iconColor: Color(0xFFAD9090)
+              ),
+              onChanged: (text) {
+                  duration = text;
+              })),
+          Padding(padding:EdgeInsets.fromLTRB(15, 5, 15, 5), child: TextField(
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
+              decoration: InputDecoration(
+                  hintText: 'Enter Description',
+
+                  iconColor: Color(0xFFAD9090)
+              ),
+              onChanged: (text) {
+                  desc = text;
+              })),
+          Padding(padding:EdgeInsets.all(10), child: SizedBox(
+            width: 200,
+            height: 40,
+            child: FilledButton(
+              onPressed: () {
+                setState(() {
+                  vm.addCustomSpell(name, desc, level, school, castingTime, range, components, duration);
+                  flipNewSpellFlag();
+                });
+              },
+              style: FilledButton.styleFrom(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+              ),
+              child: const Text(
+                'Add Spell',
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+          ),)
+        ],
+      );
+    } else {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Padding(padding:EdgeInsets.all(10), child: SizedBox(
+            width: 200,
+            height: 40,
+            child: FilledButton(
+              onPressed: flipNewSpellFlag,
+              style: FilledButton.styleFrom(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+              ),
+              child: const Text(
+                '+ Add New Spell',
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+          ),)
+        ]
+      );
+    }
   }
 
   Column getAttacks() {
@@ -216,6 +349,7 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
                         collapsedIconColor: Color(0xFF302727),
                         childrenPadding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
                         expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                        expandedAlignment: Alignment.centerLeft,
                         backgroundColor: Color(0xFFAD9090),
                         collapsedBackgroundColor: Color(0xFFAD9090),
                         children: <Widget>[
@@ -229,7 +363,24 @@ class _CharacterSheetViewState extends State<CharacterSheetView> {
                       )
                   );
                 }
-          ),]
+          ),
+            Container(
+                width: MediaQuery.of(context).size.width*0.875,
+                decoration: BoxDecoration(
+                  color: Color(0xFFAD9090),
+                ),
+                child: Column (
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 25.0),
+                          child: getSpellCustomization()
+                      ),
+                    ]
+                )
+            ),
+          ]
         );
       } else {
         return Column(

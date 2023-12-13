@@ -31,6 +31,10 @@ class CharacterSheetViewModel extends ChangeNotifier {
     List<int> get abilityModifiers => characterModel.abilityModifiers;
 
     List<Spell>? get spells => characterModel.spells;
+    setSpells(List<Spell>? spells) {
+        characterModel.spells = spells;
+        notifyListeners();
+    }
 
     int? get maxSpellSlots => characterModel.maxSpellSlots;
 
@@ -65,6 +69,9 @@ class CharacterSheetViewModel extends ChangeNotifier {
     }
 
     void addSpell(Spell spell) {
+        if (spells == null) {
+            setSpells([]);
+        }
         spells?.add(spell);
     }
 
