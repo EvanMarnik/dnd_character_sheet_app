@@ -403,186 +403,6 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
               onChanged: (text) {
                 selectedName = text;
               }),
-          const Text(
-            'Select Class',
-            style: TextStyle(
-              color: Color(0xFF302727),
-            ),
-          ),
-          DropdownMenu(
-              dropdownMenuEntries: classList
-                  .map<DropdownMenuEntry<CharacterOption>>(
-                      (CharacterOption value) {
-                return DropdownMenuEntry<CharacterOption>(
-                    value: value, label: value.name);
-              }).toList(),
-              initialSelection: classList.first,
-              menuStyle: MenuStyle(
-                  backgroundColor:
-                      MaterialStatePropertyAll<Color>(Color(0xFFAD9090))),
-              onSelected: (CharacterOption? classPick) {
-                setState(() {
-                  selectedClass = classPick;
-                });
-              }),
-          const Text(
-            'Select Race',
-            style: TextStyle(
-              color: Color(0xFF302727),
-            ),
-          ),
-          DropdownMenu(
-              dropdownMenuEntries: raceList
-                  .map<DropdownMenuEntry<CharacterOption>>(
-                      (CharacterOption value) {
-                return DropdownMenuEntry<CharacterOption>(
-                    value: value, label: value.name);
-              }).toList(),
-              initialSelection: raceList.first,
-              menuStyle: MenuStyle(
-                  backgroundColor:
-                      MaterialStatePropertyAll<Color>(Color(0xFFAD9090))),
-              onSelected: (CharacterOption? racePick) {
-                setState(() {
-                  selectedRace = racePick;
-                });
-              }),
-          const Text(
-            'Select Background',
-            style: TextStyle(
-              color: Color(0xFF302727),
-            ),
-          ),
-          DropdownMenu(
-              dropdownMenuEntries: backgroundList
-                  .map<DropdownMenuEntry<CharacterOption>>(
-                      (CharacterOption value) {
-                return DropdownMenuEntry<CharacterOption>(
-                    value: value, label: value.name);
-              }).toList(),
-              initialSelection: backgroundList.first,
-              menuStyle: MenuStyle(
-                  backgroundColor:
-                      MaterialStatePropertyAll<Color>(Color(0xFFAD9090))),
-              onSelected: (CharacterOption? bgPick) {
-                setState(() {
-                  selectedBG = bgPick;
-                });
-              }),
-          SizedBox(
-              width: 100,
-              child: TextField(
-                  decoration: InputDecoration(
-                      hintText: 'STR', iconColor: Color(0xFFAD9090)),
-                  keyboardType: TextInputType.number,
-                  inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.digitsOnly
-                  ],
-                  onChanged: (text) {
-                    strength = int.parse(text);
-                  })),
-          SizedBox(
-              width: 100,
-              child: TextField(
-                  decoration: InputDecoration(
-                      hintText: 'DEX', iconColor: Color(0xFFAD9090)),
-                  keyboardType: TextInputType.number,
-                  inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.digitsOnly
-                  ],
-                  onChanged: (text) {
-                    dexterity = int.parse(text);
-                  })),
-          SizedBox(
-              width: 100,
-              child: TextField(
-                  decoration: InputDecoration(
-                      hintText: 'CON', iconColor: Color(0xFFAD9090)),
-                  keyboardType: TextInputType.number,
-                  inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.digitsOnly
-                  ],
-                  onChanged: (text) {
-                    constitution = int.parse(text);
-                  })),
-          SizedBox(
-              width: 100,
-              child: TextField(
-                  decoration: InputDecoration(
-                      hintText: 'INT', iconColor: Color(0xFFAD9090)),
-                  keyboardType: TextInputType.number,
-                  inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.digitsOnly
-                  ],
-                  onChanged: (text) {
-                    intelligence = int.parse(text);
-                  })),
-          SizedBox(
-              width: 100,
-              child: TextField(
-                  decoration: InputDecoration(
-                      hintText: 'WIS', iconColor: Color(0xFFAD9090)),
-                  keyboardType: TextInputType.number,
-                  inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.digitsOnly
-                  ],
-                  onChanged: (text) {
-                    wisdom = int.parse(text);
-                  })),
-          SizedBox(
-              width: 100,
-              child: TextField(
-                  decoration: InputDecoration(
-                      hintText: 'CHA', iconColor: Color(0xFFAD9090)),
-                  keyboardType: TextInputType.number,
-                  inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.digitsOnly
-                  ],
-                  onChanged: (text) {
-                    charisma = int.parse(text);
-                  })),
-              selectedClass!.name == "Barbarian" || selectedClass!.name == "Rogue" || selectedClass!.name == "Paladin" || selectedClass!.name == "Ranger" ||
-                  selectedClass!.name == "Monk" || selectedClass!.name == "Fighter"
-          ? Container() :
-              MultiSelectDialogField(
-                items: cantrips.map((e) => MultiSelectItem(e, e.name)).toList(),
-                listType: MultiSelectListType.CHIP,
-                title: Text("Cantrips"),
-                onConfirm: (values) {
-                  selectedCantrips = values;
-                },
-              ),
-              selectedClass!.name == "Barbarian" || selectedClass!.name == "Rogue" || selectedClass!.name == "Paladin" || selectedClass!.name == "Ranger" ||
-                  selectedClass!.name == "Monk" || selectedClass!.name == "Fighter"
-          ? Container() :
-              MultiSelectDialogField(
-                items: firstLevel.map((e) => MultiSelectItem(e, e.name)).toList(),
-                listType: MultiSelectListType.CHIP,
-                title: Text("First Level Spells"),
-                onConfirm: (values) {
-                  selectedFirstLevel = values;
-                },
-              ),
-              SizedBox(
-              width: 350,
-              child: FilledButton(
-                style: FilledButton.styleFrom(
-                  textStyle: const TextStyle(fontSize: 25),
-            child: Center(child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Padding(padding: EdgeInsets.symmetric(vertical: 10), child: SizedBox(
-                    width: MediaQuery.of(context).size.width*0.8,
-                    child: TextField(
-                        decoration: InputDecoration(
-                            hintText: 'Enter Name', iconColor: Color(0xFFAD9090)),
-
-                        onChanged: (text) {
-                          selectedName = text;
-                        })
-                  )),
-
               const Text(
                 'Select Class',
                 style: TextStyle(
@@ -752,6 +572,9 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                           })
 
                   )),
+              selectedClass!.name == "Barbarian" || selectedClass!.name == "Rogue" || selectedClass!.name == "Paladin" || selectedClass!.name == "Ranger" ||
+                  selectedClass!.name == "Monk" || selectedClass!.name == "Fighter"
+                  ? Container() :
                   Padding(padding: EdgeInsets.symmetric(vertical: 10), child: SizedBox(
                     width: MediaQuery.of(context).size.width*0.8,
                     child: MultiSelectDialogField(
@@ -763,6 +586,9 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                       },
                     ),
                   )),
+              selectedClass!.name == "Barbarian" || selectedClass!.name == "Rogue" || selectedClass!.name == "Paladin" || selectedClass!.name == "Ranger" ||
+                  selectedClass!.name == "Monk" || selectedClass!.name == "Fighter"
+                  ? Container() :
             Padding(padding: EdgeInsets.symmetric(vertical: 10), child: SizedBox(
                 width: MediaQuery.of(context).size.width*0.8,
                 child: MultiSelectDialogField(
@@ -807,6 +633,6 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                     },
                     child: const Text('Create Character'),
                   )))
-            ]))));
+            ])));
   }
 }
