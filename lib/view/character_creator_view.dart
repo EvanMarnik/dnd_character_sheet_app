@@ -208,23 +208,29 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                   onChanged: (text) {
                     charisma = int.parse(text);
                   })),
-          MultiSelectDialogField(
-            items: cantrips.map((e) => MultiSelectItem(e, e.name)).toList(),
-            listType: MultiSelectListType.CHIP,
-            title: Text("Cantrips"),
-            onConfirm: (values) {
-              selectedCantrips = values;
-            },
-          ),
-          MultiSelectDialogField(
-            items: firstLevel.map((e) => MultiSelectItem(e, e.name)).toList(),
-            listType: MultiSelectListType.CHIP,
-            title: Text("First Level Spells"),
-            onConfirm: (values) {
-              selectedFirstLevel = values;
-            },
-          ),
-          SizedBox(
+              selectedClass!.name == "Barbarian" || selectedClass!.name == "Rogue" || selectedClass!.name == "Paladin" || selectedClass!.name == "Ranger" ||
+                  selectedClass!.name == "Monk" || selectedClass!.name == "Fighter"
+          ? Container() :
+              MultiSelectDialogField(
+                items: cantrips.map((e) => MultiSelectItem(e, e.name)).toList(),
+                listType: MultiSelectListType.CHIP,
+                title: Text("Cantrips"),
+                onConfirm: (values) {
+                  selectedCantrips = values;
+                },
+              ),
+              selectedClass!.name == "Barbarian" || selectedClass!.name == "Rogue" || selectedClass!.name == "Paladin" || selectedClass!.name == "Ranger" ||
+                  selectedClass!.name == "Monk" || selectedClass!.name == "Fighter"
+          ? Container() :
+              MultiSelectDialogField(
+                items: firstLevel.map((e) => MultiSelectItem(e, e.name)).toList(),
+                listType: MultiSelectListType.CHIP,
+                title: Text("First Level Spells"),
+                onConfirm: (values) {
+                  selectedFirstLevel = values;
+                },
+              ),
+              SizedBox(
               width: 350,
               child: FilledButton(
                 style: FilledButton.styleFrom(
