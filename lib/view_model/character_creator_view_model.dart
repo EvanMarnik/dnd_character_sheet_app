@@ -23,6 +23,10 @@ class CharacterCreatorViewModel extends ChangeNotifier{
     late int currHitPoints = 0;
     late int hitDice = 0;
 
+    late List<int> skillProficiencyNums = [];
+    late List<String> otherProficiencies = [];
+    late List<int> abilityModifiers = [];
+
     late CharacterModel character = CharacterModel(
         name: "Null",
         charClass: barbarian,
@@ -115,17 +119,45 @@ class CharacterCreatorViewModel extends ChangeNotifier{
     }
     int get getHitDice => hitDice;
 
-    void constructCharacter() {
-        List<int> skillProficiencyNums = [];
-        List<String> otherProficiencies = [];
-        List<int> abilityModifiers = [];
-        int determinedHitDice = hitDice ?? 0;
-        // combine proficiency lists
-        skillProficiencyNums = charClass.getSkillProficiencies;
-        skillProficiencyNums.addAll(background.getSkillProficiencies);
+    void addSkillProficiency(int prof) {
+        this.skillProficiencyNums.add(prof);
+    }
 
-        otherProficiencies = charClass.getOtherProficiencies;
-        otherProficiencies.addAll(background.getOtherProficiencies);
+    void addOtherProficiency(String prof) {
+        this.otherProficiencies.add(prof);
+    }
+
+    void addClassFeature(Feature feature) {
+        this.charClass.features.add(feature);
+    }
+
+    void addSubclassFeature(Feature feature) {
+        this.subclass?.features.add(feature);
+    }
+
+    void addBackgroundFeature(Feature feature) {
+        this.background.features.add(feature);
+    }
+
+    void addRaceFeature(Feature feature) {
+        this.race.features.add(feature);
+    }
+
+    void constructCharacter() {
+        int determinedHitDice = hitDice ?? 0;
+        // combine proficiency lists only if not custom
+        // if (!(charClass == customClass || !classes.contains(charClass))) {
+            skillProficiencyNums = charClass.getSkillProficiencies;
+            otherProficiencies = charClass.getOtherProficiencies;
+        // }
+        // if (!(race == customRace || !races.contains(customRace))) {
+            skillProficiencyNums.addAll(race.getSkillProficiencies);
+            otherProficiencies.addAll(race.getOtherProficiencies);
+        // }
+        // if (!(background == customBG || !backgrounds.contains(customBG))) {
+            skillProficiencyNums.addAll(background.getSkillProficiencies);
+            otherProficiencies.addAll(background.getOtherProficiencies);
+        // }
 
         // conditionally add subclass proficiencies
         if (subclass != null) {
@@ -152,24 +184,28 @@ class CharacterCreatorViewModel extends ChangeNotifier{
         maxHitPoints = 0;
         currHitPoints = 0;
         if (charClass.name == "Barbarian") {
-            maxHitPoints = 12 + abilityModifiers[2];
-            currHitPoints = maxHitPoints;
             determinedHitDice = 12;
         }
         else if (charClass.name == "Bard" || charClass.name == "Cleric" || charClass.name == "Druid" || charClass.name == "Monk" || charClass.name == "Rogue" || charClass.name == "Warlock") {
-            maxHitPoints = 8 + abilityModifiers[2];
-            currHitPoints = maxHitPoints;
             determinedHitDice = 8;
         }
         else if (charClass.name == "Fighter" || charClass.name == "Paladin" || charClass.name == "Ranger") {
-            maxHitPoints = 10 + abilityModifiers[2];
-            currHitPoints = maxHitPoints;
             determinedHitDice = 10;
         }
         else if (charClass.name == "Sorcerer" || charClass.name == "Wizard") {
-            maxHitPoints = 6 + abilityModifiers[2];
-            currHitPoints = maxHitPoints;
             determinedHitDice = 6;
+        }
+
+        maxHitPoints += determinedHitDice+abilityModifiers[2];
+        currHitPoints += maxHitPoints;
+
+        // set subclass
+        if (charClass.name == "Cleric") {
+            subclass = lifeDomain;
+        } else if (charClass.name == "Sorcerer") {
+            subclass = draconicBloodline;
+        } else if (charClass.name == "Warlock") {
+            subclass = fiend;
         }
         
         int armorClass = 10+abilityModifiers[1];

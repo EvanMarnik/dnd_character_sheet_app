@@ -42,7 +42,8 @@ List<CharacterOption> classes = [
   rogue,
   sorcerer,
   warlock,
-  wizard
+  wizard,
+  customClass
 ];
 CharacterOption barbarian = CharacterOption(
     name: "Barbarian",
@@ -150,6 +151,12 @@ CharacterOption wizard = CharacterOption(
     otherProficiencies: ["Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows"],
     skillProficiencies: [ARCANA, HISTORY]
 );
+CharacterOption customClass = CharacterOption(
+    name: "Custom",
+    features: [],
+    otherProficiencies: [],
+    skillProficiencies: []
+);
 
 // subclasses
 List<CharacterOption> subclasses = [
@@ -192,7 +199,8 @@ List<CharacterOption> races = [
   halfling,
   halfOrc,
   human,
-  tiefling
+  tiefling,
+  customRace
 ];
 CharacterOption dragonborn = CharacterOption(
   name: "Dragonborn",
@@ -275,6 +283,12 @@ CharacterOption tiefling = CharacterOption(
   otherProficiencies: ["Common", "Infernal"],
   skillProficiencies: []
 );
+CharacterOption customRace = CharacterOption(
+  name:  "Custom",
+  features: [],
+  otherProficiencies: [],
+  skillProficiencies: []
+);
 
 // backgrounds
 List<CharacterOption> backgrounds = [
@@ -290,7 +304,8 @@ List<CharacterOption> backgrounds = [
   sage,
   sailor,
   soldier,
-  urchin
+  urchin,
+  customBG
 ];
 CharacterOption acolyte = CharacterOption(
   name: "Acolyte",
@@ -395,6 +410,12 @@ CharacterOption urchin = CharacterOption(
   ],
   otherProficiencies: ["Disguise Kit", "Thieves' Tools"],
   skillProficiencies: [SLEIGHT_OF_HAND, STEALTH]
+);
+CharacterOption customBG = CharacterOption(
+  name: "Custom",
+  features: [],
+  otherProficiencies: [],
+  skillProficiencies: []
 );
 
 // spells
