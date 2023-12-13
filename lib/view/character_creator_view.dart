@@ -498,7 +498,7 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                     child: getBGCustomization(),
                   )),
               Padding(padding: EdgeInsets.symmetric(vertical: 15), child: const Text(
-                    'Select Ability Scores',
+                    'Enter Ability Scores',
                     style: TextStyle(
                       color: Color(0xFF302727),
                     ),
@@ -612,6 +612,13 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                       items: cantrips.map((e) => MultiSelectItem(e, e.name)).toList(),
                       listType: MultiSelectListType.CHIP,
                       title: Text("Cantrips", style: TextStyle(color: Color(0xFF302727)),),
+                      backgroundColor: Color(0xFFAD9090),
+                      confirmText: Text("Confirm", style: TextStyle(
+                        color: Color(0xFF302727),
+                      )),
+                      cancelText: Text("Cancel", style: TextStyle(
+                        color: Color(0xFF302727),
+                      )),
                       onConfirm: (values) {
                         selectedCantrips = values;
                       },
@@ -626,7 +633,14 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                     selectedColor: Color(0xFF302727),
                     items: firstLevel.map((e) => MultiSelectItem(e, e.name)).toList(),
                     listType: MultiSelectListType.CHIP,
+                    backgroundColor: Color(0xFFAD9090),
                     title: Text("First Level Spells", style: TextStyle(color: Color(0xFF302727)),),
+                    confirmText: Text("Confirm", style: TextStyle(
+                      color: Color(0xFF302727),
+                    )),
+                    cancelText: Text("Cancel", style: TextStyle(
+                      color: Color(0xFF302727),
+                    )),
                     onConfirm: (values) {
                       selectedFirstLevel = values;
                     },
