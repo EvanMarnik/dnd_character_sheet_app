@@ -498,7 +498,7 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                     child: getBGCustomization(),
                   )),
                   const Text(
-                    'Select Ability Scores',
+                    'Enter Ability Scores',
                     style: TextStyle(
                       color: Color(0xFF302727),
                     ),
@@ -597,6 +597,13 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                       items: cantrips.map((e) => MultiSelectItem(e, e.name)).toList(),
                       listType: MultiSelectListType.CHIP,
                       title: Text("Cantrips"),
+                      backgroundColor: Color(0xFFAD9090),
+                      confirmText: Text("Confirm", style: TextStyle(
+                        color: Colors.black,
+                      )),
+                      cancelText: Text("Cancel", style: TextStyle(
+                        color: Colors.black,
+                      )),
                       onConfirm: (values) {
                         selectedCantrips = values;
                       },
@@ -610,7 +617,14 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                 child: MultiSelectDialogField(
                     items: firstLevel.map((e) => MultiSelectItem(e, e.name)).toList(),
                     listType: MultiSelectListType.CHIP,
+                    backgroundColor: Color(0xFFAD9090),
                     title: Text("First Level Spells"),
+                    confirmText: Text("Confirm", style: TextStyle(
+                      color: Colors.black,
+                    )),
+                    cancelText: Text("Cancel", style: TextStyle(
+                      color: Colors.black,
+                    )),
                     onConfirm: (values) {
                       selectedFirstLevel = values;
                     },
