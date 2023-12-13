@@ -563,22 +563,7 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                           })
 
                   )),
-                  MultiSelectDialogField(
-            items: cantrips.map((e) => MultiSelectItem(e, e.name)).toList(),
-            listType: MultiSelectListType.CHIP,
-            title: Text("Cantrips"),
-            onConfirm: (values) {
-              selectedCantrips = values;
-            },
-          ),
-          MultiSelectDialogField(
-            items: firstLevel.map((e) => MultiSelectItem(e, e.name)).toList(),
-            listType: MultiSelectListType.CHIP,
-            title: Text("First Level Spells"),
-            onConfirm: (values) {
-              selectedFirstLevel = values;
-            },
-          ),
+
                   Padding(padding: EdgeInsets.symmetric(vertical: 10), child: SizedBox(
                       width: 100,
                       child: TextField(
@@ -593,6 +578,28 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                           })
 
                   )),
+                  Padding(padding: EdgeInsets.symmetric(vertical: 10), child: SizedBox(
+                    width: MediaQuery.of(context).size.width*0.8,
+                    child: MultiSelectDialogField(
+                      items: cantrips.map((e) => MultiSelectItem(e, e.name)).toList(),
+                      listType: MultiSelectListType.CHIP,
+                      title: Text("Cantrips"),
+                      onConfirm: (values) {
+                        selectedCantrips = values;
+                      },
+                    ),
+                  )),
+            Padding(padding: EdgeInsets.symmetric(vertical: 10), child: SizedBox(
+                width: MediaQuery.of(context).size.width*0.8,
+                child: MultiSelectDialogField(
+                    items: firstLevel.map((e) => MultiSelectItem(e, e.name)).toList(),
+                    listType: MultiSelectListType.CHIP,
+                    title: Text("First Level Spells"),
+                    onConfirm: (values) {
+                      selectedFirstLevel = values;
+                    },
+                  ),
+            )),
 
               Padding(padding: EdgeInsets.symmetric(vertical: 10), child: SizedBox(
                   width: 350,
@@ -615,7 +622,9 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                       else {
                         vm.setSpells(selectedCantrips);
                       }
-                    }
+                    } else if (selectedFirstLevel == null) {  // if both are null
+                        vm.setSpells(null); // force null spell list
+                      }
                       vm.constructCharacter();
                       Navigator.pushNamed(context, listRoute,
                           arguments: characterListViewModel);
