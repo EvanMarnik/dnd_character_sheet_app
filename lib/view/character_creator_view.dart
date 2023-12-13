@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:dnd_character_sheet_app/model/spell.dart';
 import 'package:dnd_character_sheet_app/view_model/character_creator_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:dnd_character_sheet_app/constants.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/services.dart';
 import '../model/character_model.dart';
 import '../model/character_option.dart';
 import '../model/feature.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 class CharacterCreatorView extends StatefulWidget {
   CharacterListViewModel characterListViewModel;
@@ -379,6 +381,8 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
       return Column();
     }
   }
+  List<Spell>? selectedCantrips;
+  List<Spell>? selectedFirstLevel;
 
   @override
   Widget build(BuildContext context) {
@@ -559,6 +563,22 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                           })
 
                   )),
+                  MultiSelectDialogField(
+            items: cantrips.map((e) => MultiSelectItem(e, e.name)).toList(),
+            listType: MultiSelectListType.CHIP,
+            title: Text("Cantrips"),
+            onConfirm: (values) {
+              selectedCantrips = values;
+            },
+          ),
+          MultiSelectDialogField(
+            items: firstLevel.map((e) => MultiSelectItem(e, e.name)).toList(),
+            listType: MultiSelectListType.CHIP,
+            title: Text("First Level Spells"),
+            onConfirm: (values) {
+              selectedFirstLevel = values;
+            },
+          ),
                   Padding(padding: EdgeInsets.symmetric(vertical: 10), child: SizedBox(
                       width: 100,
                       child: TextField(
@@ -586,6 +606,16 @@ class _CharacterCreatorViewState extends State<CharacterCreatorView> {
                       vm.setBackground(selectedBG!);
                       vm.setName(selectedName);
                       vm.setAbilityScores([strength, dexterity, constitution, intelligence, wisdom, charisma]);
+                      if(selectedCantrips != null)
+                    {
+                      if(selectedFirstLevel != null)
+                        {
+                          vm.setSpells(selectedCantrips! + selectedFirstLevel!);
+                        }
+                      else {
+                        vm.setSpells(selectedCantrips);
+                      }
+                    }
                       vm.constructCharacter();
                       Navigator.pushNamed(context, listRoute,
                           arguments: characterListViewModel);
