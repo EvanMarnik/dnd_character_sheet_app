@@ -17,8 +17,8 @@ class CharacterCreatorViewModel extends ChangeNotifier{
     late List<Spell>? spells = [];
     late String name = "";
 
-    late int? maxSpellSlots = null;
-    late int? currSpellSlots = null;
+    late int? maxSpellSlots = 0;
+    late int? currSpellSlots = 0;
     late int maxHitPoints = 0;
     late int currHitPoints = 0;
     late int hitDice = 0;
@@ -174,10 +174,6 @@ class CharacterCreatorViewModel extends ChangeNotifier{
         if (charClass.name == "Bard" || charClass.name == "Cleric" || charClass.name == "Druid" || charClass.name == "Sorcerer" || charClass.name == "Warlock" || charClass.name == "Wizard") {
             maxSpellSlots = 2;
             currSpellSlots = 2;
-        }
-        else {
-            maxSpellSlots = null;
-            currSpellSlots = null;
         }
 
         // set hit points
